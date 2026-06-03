@@ -22,7 +22,7 @@ function awaken(; name::String, router::String, pub::String, tog::String, replpo
     @show pwd(), name
     @show Base.active_project()
     @show Pkg.status()
-    TOGCommunicationClient.awaken(group=group, router=router, pub=pub)
+    TOGCommunicationClient.awaken(name=name, router=router, pub=pub)
     @show "TOGCommunicationClient.start"
     TOGZMQClient.awaken(tog)
     @show "TOGZMQClient.start"
