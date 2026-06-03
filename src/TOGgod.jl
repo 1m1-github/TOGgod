@@ -12,9 +12,6 @@ const OCTAHEDRON = Ref{Octahedron}()
 
 CONFIG = Dict{String,Any}()
 function awaken(; name::String, router::String, pub::String, tog::String, replport::Integer)
-    # write(joinpath(".tog", "pid"), getpid())
-    @async serve_repl(replport)
-    Pkg.update()
     CONFIG["name"] = name
     CONFIG["router"] = router
     CONFIG["pub"] = pub
