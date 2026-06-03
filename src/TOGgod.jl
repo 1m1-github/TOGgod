@@ -3,7 +3,7 @@ module TOGgod
 export TOGAPI, update
 
 using Pkg, StaticArrays, RemoteREPL, Serialization
-using LoopOS, TOGLearning, TOGZMQClient, TOGREPL
+using LoopOS, TOGLearning, TOGZMQClient, TOGREPL, TOGCommunicationClient
 using TOGOctahedron: Octahedron
 using TOG: T, ○
 
