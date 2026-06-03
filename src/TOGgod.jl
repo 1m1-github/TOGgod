@@ -17,15 +17,9 @@ function awaken(; name::String, router::String, pub::String, tog::String, replpo
     CONFIG["pub"] = pub
     CONFIG["tog"] = tog
     CONFIG["replport"] = replport
-    # cd(name)
     Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
-    @show pwd(), name
-    @show Base.active_project()
-    @show Pkg.status()
     TOGCommunicationClient.awaken(name=name, router=router, pub=pub)
-    @show "TOGCommunicationClient.start"
     TOGZMQClient.awaken(tog)
-    @show "TOGZMQClient.start"
     TOGAPI[] = String(TOGZMQClient.call(:api))
     # @show collect(keys(LoopOSTOGZMQClient.LoopOSZMQAPIClient.FUNCTIONS))
     # @show togtime()
