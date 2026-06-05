@@ -4,10 +4,10 @@ export TOGAPI, learn
 
 using Pkg, StaticArrays, Serialization
 using LoopOS, TOGLearning, TOGZMQClient, TOGCommunicationClient, TOGAwaken
-# using TOGREPL
+using TOGREPL
 using TOGOctahedron: Octahedron
-using TOGOmega: T
-using TOG: ○, t
+using TOGOmega: T, t
+using TOG: ○
 
 const TOGAPI = Ref("")
 const OCTAHEDRON = Ref{Octahedron}()
@@ -20,7 +20,7 @@ function __init__()
     end)
 end
 
-function awaken(; name="i", universe="..")
+function awaken(; intelligence::Function, name="i", universe="..")
     TOGAwaken.isrunning() && error("TOGgod $name is already running.")
     TOGAwaken.writepid()
     # CONFIG["name"] = name
@@ -29,23 +29,25 @@ function awaken(; name="i", universe="..")
     TOGZMQClient.awaken(TOGAwaken.tog(path=universe))
     TOGCommunicationClient.awaken(name=name, dealer=TOGAwaken.router(path=universe), sub=TOGAwaken.pub(path=universe))
     TOGAPI[] = String(TOGZMQClient.call(:api))
-    @show "TOGAPI", TOGAPI[]
     ϕ = MathConstants.golden
-    # OCTAHEDRON[] = Octahedron(
-    #     t=t(),
-    #     d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
-    #     ẑeroμ=SA[zero(T), ○, ○, ○],
-    #     ôneμ=SA[zero(T), ○, ○, ○],
-    #     ρ=SA[typemin(T), typemin(T), typemin(T), typemin(T)],
-    #     ♯=(10^3, 10^3))
-    # @show OCTAHEDRON[]
+    OCTAHEDRON[] = Octahedron(
+        t=t(),
+        d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
+        ẑeroμ=SA[zero(T), ○, ○, ○],
+        ôneμ=SA[zero(T), ○, ○, ○],
+        ρ=SA[T(0.01), T(0.01), T(0.01), T(0.01)],
+        ♯=(10^3, 10^3))
+    # Pkg.add(name)
+    # Pkg.resolve()
+    # Pkg.instantiate()
     # @eval using $(Symbol(name))
     # @show "using Symbol(name)"
     # LoopOS.awaken(getfield(name, intelligence))
+    LoopOS.awaken(intelligence)
     # @show "LoopOS.awaken"
     # @async serve_repl(replport)
     # @show "serve_repl", replport
-    # TOGREPL.awaken()
+    TOGREPL.awaken()
     # 0
 end
 
