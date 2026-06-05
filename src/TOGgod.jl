@@ -25,8 +25,8 @@ function awaken(; name="i", universe="..")
     # CONFIG["name"] = name
     # CONFIG["universe"] = universe
     # Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
-    TOGCommunicationClient.awaken(name=name, router=TOGAwaken.router(), pub=TOGAwaken.pub())
-    TOGZMQClient.awaken(TOGAwaken.tog())
+    TOGCommunicationClient.awaken(name=name, router=TOGAwaken.router(path=universe), pub=TOGAwaken.pub(path=universe))
+    TOGZMQClient.awaken(TOGAwaken.tog(path=universe))
     # TOGAPI[] = String(TOGZMQClient.call(:api))
     # @show "TOGAPI", TOGAPI[]
     # ϕ = MathConstants.golden

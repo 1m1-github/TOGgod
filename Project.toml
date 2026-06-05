@@ -1,6 +1,6 @@
 name = "TOGgod"
 uuid = "3cd4964b-de73-4059-a3ed-5bf4fdcd466c"
-version = "11.0.0"
+version = "12.0.0"
 authors = ["1m1 <imi@1m1.io>"]
 
 [deps]
