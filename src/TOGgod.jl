@@ -3,7 +3,8 @@ module TOGgod
 export TOGAPI, learn
 
 using Pkg, StaticArrays, Serialization
-using LoopOS, TOGLearning, TOGZMQClient, TOGREPL, TOGCommunicationClient, TOGAwaken
+using LoopOS, TOGLearning, TOGZMQClient, TOGCommunicationClient, TOGAwaken
+# using TOGREPL
 using TOGOctahedron: Octahedron
 using TOGOmega: T
 using TOG: ○, t
@@ -25,11 +26,11 @@ function awaken(; name="i", universe="..")
     # CONFIG["name"] = name
     # CONFIG["universe"] = universe
     # Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
-    TOGCommunicationClient.awaken(name=name, router=TOGAwaken.router(path=universe), pub=TOGAwaken.pub(path=universe))
     TOGZMQClient.awaken(TOGAwaken.tog(path=universe))
-    # TOGAPI[] = String(TOGZMQClient.call(:api))
-    # @show "TOGAPI", TOGAPI[]
-    # ϕ = MathConstants.golden
+    TOGCommunicationClient.awaken(name=name, dealer=TOGAwaken.router(path=universe), sub=TOGAwaken.pub(path=universe))
+    TOGAPI[] = String(TOGZMQClient.call(:api))
+    @show "TOGAPI", TOGAPI[]
+    ϕ = MathConstants.golden
     # OCTAHEDRON[] = Octahedron(
     #     t=t(),
     #     d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
@@ -44,7 +45,7 @@ function awaken(; name="i", universe="..")
     # @show "LoopOS.awaken"
     # @async serve_repl(replport)
     # @show "serve_repl", replport
-    TOGREPL.awaken()
+    # TOGREPL.awaken()
     # 0
 end
 

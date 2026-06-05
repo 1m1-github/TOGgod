@@ -24,7 +24,7 @@ Pkg.add("TOGgod")'
 ## Run
 
 ```
-env JULIA_PKG_DEVDIR=~/.julia/dev JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --quiet --eval 'using TOGgod
+env JULIA_PKG_DEVDIR=$HOME/.julia/dev JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --interactive --quiet --eval 'using TOGgod
 TOGgod.awaken()'
 ```
 
