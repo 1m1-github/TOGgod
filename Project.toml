@@ -1,12 +1,12 @@
 name = "TOGgod"
 uuid = "3cd4964b-de73-4059-a3ed-5bf4fdcd466c"
-version = "6.0.0"
+version = "7.0.0"
 authors = ["1m1 <imi@1m1.io>"]
 
 [deps]
 Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 TOGOctahedron = "63dbb591-2283-4878-9590-a413da56821f"
-RemoteREPL = "1bd9f7bb-701c-4338-bec7-ac987af7c555"
+TOGAwaken = "ad6da560-61cf-4870-8d75-c7ac94e30631"
 Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 TOG = "894673ee-413c-4601-8a2e-415a0e884e29"
 TOGCommunicationClient = "63208c60-c5c5-4955-8db3-5e63e3da614e"

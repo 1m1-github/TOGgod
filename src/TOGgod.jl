@@ -1,33 +1,38 @@
 module TOGgod
 
-export TOGAPI, update
+export TOGAPI, learn
 
-using Pkg, StaticArrays, RemoteREPL, Serialization
-using LoopOS, TOGLearning, TOGZMQClient, TOGREPL, TOGCommunicationClient
+using Pkg, StaticArrays, Serialization
+using LoopOS, TOGLearning, TOGZMQClient, TOGREPL, TOGCommunicationClient, TOGAwaken
 using TOGOctahedron: Octahedron
-using TOG: T, ○
+using TOGOmega: T
+using TOG: ○, t
 
 const TOGAPI = Ref("")
 const OCTAHEDRON = Ref{Octahedron}()
+# const CONFIG = Dict{String,Any}()
 
-CONFIG = Dict{String,Any}()
-function awaken(; name::String, router::String, pub::String, tog::String, replport::Integer)
-    CONFIG["name"] = name
-    CONFIG["router"] = router
-    CONFIG["pub"] = pub
-    CONFIG["tog"] = tog
-    CONFIG["replport"] = replport
-    Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
-    TOGCommunicationClient.awaken(name=name, router=router, pub=pub)
-    TOGZMQClient.awaken(tog)
+function __init__()
+    atexit(_ -> begin
+        # serialize(".short", LoopOS.short())
+        TOGAwaken.rmpid()
+    end)
+end
+
+function awaken(; name="i", universe="..")
+    TOGAwaken.isrunning() && error("TOGgod $name is already running.")
+    TOGAwaken.writepid()
+    # CONFIG["name"] = name
+    # CONFIG["universe"] = universe
+    # Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
+    TOGCommunicationClient.awaken(name=name, router=TOGAwaken.router(), pub=TOGAwaken.pub())
+    TOGZMQClient.awaken(TOGAwaken.tog())
     TOGAPI[] = String(TOGZMQClient.call(:api))
-    # @show collect(keys(LoopOSTOGZMQClient.LoopOSZMQAPIClient.FUNCTIONS))
-    # @show togtime()
     @show "TOGAPI", TOGAPI[]
-    invϕ = one(T) / MathConstants.golden
+    ϕ = MathConstants.golden
     OCTAHEDRON[] = Octahedron(
-        t=togtime(),
-        d=SA[invϕ, invϕ^2, invϕ^3, invϕ^4],
+        t=t(),
+        d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
         ẑeroμ=SA[zero(T), ○, ○, ○],
         ôneμ=SA[zero(T), ○, ○, ○],
         ρ=SA[typemin(T), typemin(T), typemin(T), typemin(T)],
@@ -37,10 +42,10 @@ function awaken(; name::String, router::String, pub::String, tog::String, replpo
     @show "using Symbol(name)"
     LoopOS.awaken(getfield(name, intelligence))
     @show "LoopOS.awaken"
-    @async serve_repl(replport)
-    @show "serve_repl", replport
+    # @async serve_repl(replport)
+    # @show "serve_repl", replport
     TOGREPL.awaken()
-    0
+    # 0
 end
 
 # function awaken(; name, group, router, pub, tog)
@@ -56,7 +61,8 @@ function learn(; name::String, files=String[], pkgs=String[], rmfiles=String[], 
     updatepkg(name=name, files=files, pkgs=pkgs, rmfiles=rmfiles, rmpkgs=rmpkgs, mvfiles=mvfiles, githubuser=githubuser, githubauth=githubauth)
     Pkg.update()
     serialize(".short", LoopOS.short())
-    TOGInstall.awakengod(name=CONFIG["name"], group=CONFIG["group"], router=CONFIG["router"], pub=CONFIG["pub"], tog=CONFIG["tog"])
+    # todo start new god
+    # TOGInstall.awakengod(name=CONFIG["name"], group=CONFIG["group"], router=CONFIG["router"], pub=CONFIG["pub"], tog=CONFIG["tog"])
     exit(0)
 end
 
