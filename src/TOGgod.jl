@@ -1,6 +1,6 @@
 module TOGgod
 
-export TOGAPI, learn, LoopOS
+export TOGAPI, learn, LoopOS, T
 
 using Pkg, StaticArrays, Serialization
 using LoopOS, TOGLearning, TOGZMQClient, TOGCommunicationClient, TOGAwaken
