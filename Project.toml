@@ -1,6 +1,6 @@
 name = "TOGgod"
 uuid = "3cd4964b-de73-4059-a3ed-5bf4fdcd466c"
-version = "9.0.0"
+version = "10.0.0"
 authors = ["1m1 <imi@1m1.io>"]
 
 [deps]
@@ -11,7 +11,6 @@ Serialization = "9e88b42a-f829-5b0c-bbe9-9e923198166b"
 TOG = "894673ee-413c-4601-8a2e-415a0e884e29"
 TOGOmega = "8e4c26da-8d74-4d91-8eb5-6328a20dd598"
 TOGCommunicationClient = "63208c60-c5c5-4955-8db3-5e63e3da614e"
-TOGInstall = "737b443f-5b68-4fde-ac0f-501ab7f5c9a4"
 TOGZMQClient = "c1d2c9e1-0543-4184-a1aa-e46b4235aa2f"
 TOGREPL = "99a1b240-057c-4d61-b879-ade0146bce0c"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
