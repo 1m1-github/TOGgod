@@ -27,21 +27,21 @@ function awaken(; name="i", universe="..")
     # Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
     TOGCommunicationClient.awaken(name=name, router=TOGAwaken.router(), pub=TOGAwaken.pub())
     TOGZMQClient.awaken(TOGAwaken.tog())
-    TOGAPI[] = String(TOGZMQClient.call(:api))
-    @show "TOGAPI", TOGAPI[]
-    ϕ = MathConstants.golden
-    OCTAHEDRON[] = Octahedron(
-        t=t(),
-        d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
-        ẑeroμ=SA[zero(T), ○, ○, ○],
-        ôneμ=SA[zero(T), ○, ○, ○],
-        ρ=SA[typemin(T), typemin(T), typemin(T), typemin(T)],
-        ♯=(10^3, 10^3))
-    @show OCTAHEDRON[]
-    @eval using $(Symbol(name))
-    @show "using Symbol(name)"
-    LoopOS.awaken(getfield(name, intelligence))
-    @show "LoopOS.awaken"
+    # TOGAPI[] = String(TOGZMQClient.call(:api))
+    # @show "TOGAPI", TOGAPI[]
+    # ϕ = MathConstants.golden
+    # OCTAHEDRON[] = Octahedron(
+    #     t=t(),
+    #     d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
+    #     ẑeroμ=SA[zero(T), ○, ○, ○],
+    #     ôneμ=SA[zero(T), ○, ○, ○],
+    #     ρ=SA[typemin(T), typemin(T), typemin(T), typemin(T)],
+    #     ♯=(10^3, 10^3))
+    # @show OCTAHEDRON[]
+    # @eval using $(Symbol(name))
+    # @show "using Symbol(name)"
+    # LoopOS.awaken(getfield(name, intelligence))
+    # @show "LoopOS.awaken"
     # @async serve_repl(replport)
     # @show "serve_repl", replport
     TOGREPL.awaken()
