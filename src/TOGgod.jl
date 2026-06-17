@@ -33,8 +33,8 @@ function awaken(; intelligence::Function, name="i", universe="..")
     OCTAHEDRON[] = Octahedron(
         t=t(),
         d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
-        ẑeroμ=SA[zero(T), ○, ○, ○],
-        ôneμ=SA[zero(T), ○, ○, ○],
+        ẑeroμ=SA[zero(T), ○(T), ○(T), ○(T)],
+        ôneμ=SA[zero(T), ○(T), ○(T), ○(T)],
         ρ=SA[T(0.01), T(0.01), T(0.01), T(0.01)],
         ♯=(10^3, 10^3))
     # Pkg.add(name)
