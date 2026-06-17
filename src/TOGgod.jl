@@ -6,7 +6,7 @@ using Pkg, StaticArrays, Serialization
 using LoopOS, TOGLearning, TOGZMQClient, TOGCommunicationClient, TOGAwaken
 using TOGREPL
 using TOGOctahedron: Octahedron
-using TOGOmega: T, t
+using TOGOmega: t, T
 using TOG: ○
 
 const TOGAPI = Ref("")
