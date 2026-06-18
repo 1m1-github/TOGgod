@@ -35,8 +35,8 @@ function awaken(; intelligence::Function, name="i", universe="..")
         t=t(),
         d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
         ẑeroμ=SA[zero(T), ○(T), ○(T), ○(T)],
-        ôneμ=SA[zero(T), ○(T), ○(T), ○(T)],
-        ρ=SA[T(0.01), T(0.01), T(0.01), T(0.01)],
+        ôneμ=SA[zero(T), ○(T), ○(T), ○(T)+T(0.1)],
+        ρ=SA[T(0), T(0.1), T(0.1), T(1)],
         ♯=(10^3, 10^3))
     # Pkg.add(name)
     # Pkg.resolve()
@@ -64,7 +64,7 @@ end
 function learn(; name::String, files=String[], pkgs=String[], rmfiles=String[], rmpkgs=String[], mvfiles=false, githubuser=get(ENV, "GITHUB_USER", ""), githubauth=get(ENV, "GITHUB_AUTH", ""))
     updatepkg(name=name, files=files, pkgs=pkgs, rmfiles=rmfiles, rmpkgs=rmpkgs, mvfiles=mvfiles, githubuser=githubuser, githubauth=githubauth)
     Pkg.update()
-    serialize(".short", LoopOS.short())
+    serialize(".tog/short", LoopOS.short())
     # todo start new god
     # TOGInstall.awakengod(name=CONFIG["name"], group=CONFIG["group"], router=CONFIG["router"], pub=CONFIG["pub"], tog=CONFIG["tog"])
     exit(0)
