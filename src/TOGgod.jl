@@ -3,7 +3,7 @@ module TOGgod
 export TOGAPI, learn, LoopOS, T
 
 using Pkg, StaticArrays, Serialization
-using LoopOS, TOGLearning, TOGZMQClient, TOGCommunicationClient, TOGAwaken
+using LoopOS, TOGLearning, TOGZMQClient, TOGCommunicationClient, TOGAwaken, TOGLogging
 using TOGREPL
 using TOGOctahedron: Octahedron
 using TOGOmega: t, T
@@ -21,6 +21,7 @@ function __init__()
 end
 
 function awaken(; intelligence::Function, name="i", universe="..")
+    TOGLogging.awaken()
     TOGAwaken.isrunning() && error("TOGgod $name is already running.")
     TOGAwaken.writepid()
     # CONFIG["name"] = name

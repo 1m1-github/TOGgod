@@ -1,6 +1,6 @@
 name = "TOGgod"
 uuid = "3cd4964b-de73-4059-a3ed-5bf4fdcd466c"
-version = "20.0.0"
+version = "21.0.0"
 authors = ["1m1 <imi@1m1.io>"]
 
 [deps]
@@ -17,4 +17,5 @@ TOGZMQClient = "c1d2c9e1-0543-4184-a1aa-e46b4235aa2f"
 TOGREPL = "99a1b240-057c-4d61-b879-ade0146bce0c"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 LoopOS = "9a85759a-e2d6-4eb5-ba00-7f48a432d541"
+TOGLogging = "ca4dc87f-8132-4d7b-94ac-048606885fda"
 TOGLearning = "67d9d36d-43fb-464e-82e3-4f04d09dacc1"
