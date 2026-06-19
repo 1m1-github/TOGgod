@@ -35,7 +35,7 @@ function awaken(; intelligence::Function, name="i", universe="..")
         t=t(),
         d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
         ẑeroμ=SA[zero(T), ○(T), ○(T), ○(T)],
-        ôneμ=SA[zero(T), ○(T), ○(T), ○(T)+T(0.1)],
+        ôneμ=SA[zero(T), ○(T)+T(0.1), ○(T)+T(0.1), ○(T)+T(0.1)],
         ρ=SA[T(0), T(0.1), T(0.1), T(1)],
         ♯=(10^3, 10^3))
     # Pkg.add(name)
