@@ -28,16 +28,21 @@ function awaken(; intelligence::Function, name="i", universe="..")
     # CONFIG["universe"] = universe
     # Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
     TOGZMQClient.awaken(TOGAwaken.tog(path=universe))
-    TOGCommunicationClient.awaken(name=name, dealer=TOGAwaken.router(path=universe), sub=TOGAwaken.pub(path=universe))
-    TOGAPI[] = String(TOGZMQClient.call(:api))
+    # TOGCommunicationClient.awaken(name=name, dealer=TOGAwaken.router(path=universe), sub=TOGAwaken.pub(path=universe))
+    # TOGAPI[] = String(TOGZMQClient.call(:api))
     ϕ = MathConstants.golden
     OCTAHEDRON[] = Octahedron(
         t=t(),
-        d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
-        ẑeroμ=SA[zero(T), ○(T), ○(T), ○(T)],
-        ôneμ=SA[zero(T), ○(T)+T(0.1), ○(T)+T(0.1), ○(T)+T(0.1)],
-        ρ=SA[T(0), T(0.1), T(0.1), T(1)],
-        ♯=(10^3, 10^3))
+        d=[0.0,0.5,1.0],
+        ẑeroμ=[0.5,0.5,0.5],
+        ôneμ=[0.5,0.5,0.6],
+        ρ=[0.1, 0.1, 0.0],
+        ♯=(10^1, 10^1))
+        # d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
+        # ẑeroμ=SA[zero(T), ○(T), ○(T), ○(T)],
+        # ôneμ=SA[zero(T), ○(T)+T(0.1), ○(T)+T(0.1), ○(T)+T(0.1)],
+        # ρ=SA[T(0), T(0.1), T(0.1), T(1)],
+        # ♯=(10^3, 10^3))
     # Pkg.add(name)
     # Pkg.resolve()
     # Pkg.instantiate()
