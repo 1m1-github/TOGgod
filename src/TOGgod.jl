@@ -1,54 +1,41 @@
 module TOGgod
 
-export TOGAPI, learn, LoopOS, T
+export learn, LoopOS
 
 using Pkg, StaticArrays, Serialization
-using LoopOS, TOGLearning, TOGZMQClient, TOGCommunicationClient, TOGAwaken, TOGLogging
-using TOGREPL
+using LoopOS, TOGObserveClient, TOGCreateClient, TOGLearning, TOGCommunicationClient, TOGAwaken, TOGLogging, TOGREPL
 using TOGOctahedron: Octahedron
-using TOGOmega: t, T
+using TOGOmega: t
 using TOG: ○
 
-const TOGAPI = Ref("")
+const T = Ref{DataType}()
 const OCTAHEDRON = Ref{Octahedron}()
 # const CONFIG = Dict{String,Any}()
 
 function __init__()
     atexit(_ -> begin
         # serialize(".short", LoopOS.short())
-        TOGAwaken.rmpid()
+        TOGAwaken.sleep()
     end)
 end
 
 function awaken(; intelligence::Function, name="i", universe="..")
     TOGLogging.awaken()
-    TOGAwaken.isrunning() && error("TOGgod $name is already running.")
-    TOGAwaken.writepid()
+    TOGAwaken.awaken()
     # CONFIG["name"] = name
     # CONFIG["universe"] = universe
-    # Pkg.activate(joinpath(DEPOT_PATH[1], "dev", name))
-    TOGZMQClient.awaken(TOGAwaken.tog(path=universe))
+    TOGObserverClient.awaken(TOGAwaken.togobserve(path=universe))
+    TOGObserverClient.awaken(TOGAwaken.togcreate(path=universe))
     # TOGCommunicationClient.awaken(name=name, dealer=TOGAwaken.router(path=universe), sub=TOGAwaken.pub(path=universe))
-    # TOGAPI[] = String(TOGZMQClient.call(:api))
+    T[] = TOGObserveClient.togtype()
     ϕ = MathConstants.golden
     OCTAHEDRON[] = Octahedron(
         t=t(),
-        d=[0.0,0.5,1.0],
-        ẑeroμ=[0.5,0.5,0.5],
-        ôneμ=[0.5,0.5,0.6],
-        ρ=[0.1, 0.1, 0.0],
-        ♯=(10^1, 10^1))
-        # d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
-        # ẑeroμ=SA[zero(T), ○(T), ○(T), ○(T)],
-        # ôneμ=SA[zero(T), ○(T)+T(0.1), ○(T)+T(0.1), ○(T)+T(0.1)],
-        # ρ=SA[T(0), T(0.1), T(0.1), T(1)],
-        # ♯=(10^3, 10^3))
-    # Pkg.add(name)
-    # Pkg.resolve()
-    # Pkg.instantiate()
-    # @eval using $(Symbol(name))
-    # @show "using Symbol(name)"
-    # LoopOS.awaken(getfield(name, intelligence))
+        d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
+        ẑeroμ=SA[zero(T[]), ○(T[]), ○(T[]), ○(T[])],
+        ôneμ=SA[zero(T[]), ○(T[]), ○(T[]), ○(T[])+T[](0.1)],
+        ρ=[zero(T[]), T[](0.1), T[](0.1), zero(T[])],
+        ♯=(1, 1))
     LoopOS.awaken(intelligence)
     # @show "LoopOS.awaken"
     # @async serve_repl(replport)
