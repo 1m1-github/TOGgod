@@ -5,7 +5,6 @@ export learn, LoopOS
 using Pkg, StaticArrays, Serialization
 using LoopOS, TOGObserveClient, TOGCreateClient, TOGLearning, TOGCommunicationClient, TOGAwaken, TOGLogging, TOGREPL
 using TOGOctahedron: Octahedron
-using TOGOmega: t
 using TOG: ○
 
 const T = Ref{DataType}()
@@ -27,7 +26,7 @@ function awaken(; intelligence::Function, name="i", universe="..")
     T[] = TOGObserveClient.togtype()
     ϕ = MathConstants.golden
     OCTAHEDRON[] = Octahedron(
-        t=t(),
+        t=TOGObserveClient.togtime(),
         d=SA[ϕ^-1, ϕ^-2, ϕ^-3, ϕ^-4],
         ẑeroμ=SA[zero(T[]), ○(T[]), ○(T[]), ○(T[])],
         ôneμ=SA[zero(T[]), ○(T[]), ○(T[]), ○(T[])+T[](0.1)],
