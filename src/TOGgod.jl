@@ -12,13 +12,10 @@ const T = Ref{DataType}()
 const OCTAHEDRON = Ref{Octahedron}()
 # const CONFIG = Dict{String,Any}()
 
-function __init__()
-    atexit(_ -> begin
-        # serialize(".short", LoopOS.short())
-        TOGAwaken.sleep()
-    end)
+__init__() = atexit(sleep)
+function sleep()
+    TOGAwaken.sleep()
 end
-
 function awaken(; intelligence::Function, name="i", universe="..")
     TOGLogging.awaken()
     TOGAwaken.awaken()
