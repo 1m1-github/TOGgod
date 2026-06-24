@@ -30,5 +30,5 @@ env JULIA_PKG_DEVDIR=$HOME/.julia/dev JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/j
 ## Update
 
 ```
-env JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --quiet --eval 'using Pkg;Pkg.update()'
+env JULIA_PROJECT=.tog JULIA_DEPOT_PATH=.tog/julia julia --optimize=3 --threads=auto --quiet --eval 'using Pkg;Pkg.update(update_registry=false)'
 ```

@@ -20,9 +20,9 @@ function awaken(; intelligence::Function, name="i", universe="..")
     TOGAwaken.awaken()
     # CONFIG["name"] = name
     # CONFIG["universe"] = universe
-    TOGObserverClient.awaken(TOGAwaken.togobserve(path=universe))
-    TOGObserverClient.awaken(TOGAwaken.togcreate(path=universe))
-    # TOGCommunicationClient.awaken(name=name, dealer=TOGAwaken.router(path=universe), sub=TOGAwaken.pub(path=universe))
+    TOGObserveClient.awaken(TOGAwaken.togobserve(path=universe))
+    TOGCreateClient.awaken(TOGAwaken.togcreate(path=universe))
+    TOGCommunicationClient.awaken(name=name, dealer=TOGAwaken.router(path=universe), sub=TOGAwaken.pub(path=universe))
     T[] = TOGObserveClient.togtype()
     ϕ = MathConstants.golden
     OCTAHEDRON[] = Octahedron(
